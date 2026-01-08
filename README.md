@@ -21,12 +21,13 @@ JWT-based authentication is used for manager and engineer routes. Built using pl
 ```
 
 project-root/
-├── config/
-│   └── config.php               # DB connection & JWT secret
+│
 │
 ├── vendor/                     # Composer dependencies
 │
 ├── api/
+|   ├── config.php               # DB connection & JWT secret
+|   |
 │   ├── calls/
 │   │   └── create.php          # Public: Create call
 │   │

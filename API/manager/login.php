@@ -1,7 +1,7 @@
 // manager/login.php (similar for engineer)
 // Receive JSON { "email": "...", "password": "..." }
 require '../config.php';
-require 'vendor/autoload.php';
+require '../../vendor/autoload.php';
 use Firebase\JWT\JWT;
 
 $data = json_decode(file_get_contents("php://input"), true);
