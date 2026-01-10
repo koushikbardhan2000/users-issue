@@ -114,6 +114,39 @@ curl -X GET "http://localhost/users-issue/api/manager/calls_list.php?status=PEND
 curl -X POST http://localhost/users-issue/api/engineer/resolve_call.php -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNjIxODQsImV4cCI6MTc2ODA2NTc4NCwiZGF0YSI6eyJ1c2VyX2lkIjoiMiIsInJvbGUiOiJTVVBQT1JUX0VOR0lORUVSIn19.OMqGqS5NgTzYCP1WarvapmYrSAqSOwsTan6gbTtPYpQ" -H "Content-Type: application/json" -d '{"call_id": 4,  "resolution_status": "RESOLVED", "issue_type": "Router Issue", "remarks": "Replaced router"}'
 ```
 
+## Manager Endpoints (Protected)
+```bash
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer $MANAGER_TOKEN" http://localhost/users-issue/api/manager/profile_get.php
+
+curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer $MANAGER_TOKEN" -d '{"name":"Jane Manager","email":"jane.manager@example.com","phone":"123-456-7890"}' http://localhost/users-issue/api/manager/profile_put.php
+
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer $MANAGER_TOKEN" "http://localhost/users-issue/api/manager/calls_list.php?status=PENDING"
+
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer $MANAGER_TOKEN" "http://localhost/users-issue/api/manager/calls_list.php?status=ONGOING"
+
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer $MANAGER_TOKEN" "http://localhost/users-issue/api/manager/calls_list.php?status=CLOSED"
+
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer $MANAGER_TOKEN" "http://localhost/users-issue/api/manager/call_details.php?id=4"
+
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $MANAGER_TOKEN" -d '{"call_id":4,"engineer_id":12}' http://localhost/users-issue/api/manager/assign_engineer.php
+
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $MANAGER_TOKEN" -d '{"call_id":4,"resolution":"Issue fixed","status":"CLOSED"}' http://localhost/users-issue/api/manager/close_call.php
+
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer $MANAGER_TOKEN" http://localhost/users-issue/api/manager/support_engineers.php
+```
+
+## Engineer Endpoints (Protected)
+```bash
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNjIxODQsImV4cCI6MTc2ODA2NTc4NCwiZGF0YSI6eyJ1c2VyX2lkIjoiMiIsInJvbGUiOiJTVVBQT1JUX0VOR0lORUVSIn19.OMqGqS5NgTzYCP1WarvapmYrSAqSOwsTan6gbTtPYpQ" http://localhost/users-issue/api/engineer/profile_get.php
+
+curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNjIxODQsImV4cCI6MTc2ODA2NTc4NCwiZGF0YSI6eyJ1c2VyX2lkIjoiMiIsInJvbGUiOiJTVVBQT1JUX0VOR0lORUVSIn19.OMqGqS5NgTzYCP1WarvapmYrSAqSOwsTan6gbTtPYpQ" -d '{"name":"Eve Engineer","email":"eve.engineer@example.com","phone":"987-654-3210"}' http://localhost/users-issue/api/engineer/profile_put.php
+
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNjIxODQsImV4cCI6MTc2ODA2NTc4NCwiZGF0YSI6eyJ1c2VyX2lkIjoiMiIsInJvbGUiOiJTVVBQT1JUX0VOR0lORUVSIn19.OMqGqS5NgTzYCP1WarvapmYrSAqSOwsTan6gbTtPYpQ" "http://localhost/users-issue/api/engineer/calls_list.php?status=ONGOING"
+
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNjIxODQsImV4cCI6MTc2ODA2NTc4NCwiZGF0YSI6eyJ1c2VyX2lkIjoiMiIsInJvbGUiOiJTVVBQT1JUX0VOR0lORUVSIn19.OMqGqS5NgTzYCP1WarvapmYrSAqSOwsTan6gbTtPYpQ" "http://localhost/users-issue/api/engineer/calls_list.php?status=CLOSED"
+
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNjIxODQsImV4cCI6MTc2ODA2NTc4NCwiZGF0YSI6eyJ1c2VyX2lkIjoiMiIsInJvbGUiOiJTVVBQT1JUX0VOR0lORUVSIn19.OMqGqS5NgTzYCP1WarvapmYrSAqSOwsTan6gbTtPYpQ" -d '{"call_id":4,"resolution":"Rebooted system and issue resolved."}' http://localhost/users-issue/api/engineer/resolve_call.php
+```
 ---
 
 ## ✅ Status Codes
