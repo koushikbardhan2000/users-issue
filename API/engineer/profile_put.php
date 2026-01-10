@@ -1,5 +1,5 @@
 <?php
-// manager/profile_get.php
+// manager/profile_put.php
 header('Content-Type: application/json');
 require '../config.php';
 require '../../vendor/autoload.php';
@@ -26,18 +26,24 @@ try {
     echo json_encode(['error' => 'Invalid token']);
     exit;
 }
-if ($role !== 'MANAGER') {
+if ($role !== 'SUPPORT_ENGINEER') {
     http_response_code(403);
-    echo json_encode(['error' => 'Access denied, manager only']);
+    echo json_encode(['error' => 'Access denied, engineer only']);
     exit;
 }
-// (JWT decode omitted for brevity; assume $userId and role checked)
-$stmt = $pdo->prepare("SELECT id, name, email, phone, role, status FROM users WHERE id = ?");
-$stmt->execute([$userId]);
-$mgr = $stmt->fetch(PDO::FETCH_ASSOC);
-if (!$mgr) {
-    http_response_code(404);
-    echo json_encode(['error' => 'Manager not found']);
+
+$data = json_decode(file_get_contents("php://input"), true);
+if (!isset($data['name'], $data['email'], $data['phone'], $data['status'])) {
+    http_response_code(400);
+    echo json_encode(['error'=>'Missing fields']);
     exit;
 }
-echo json_encode($mgr);
+$sql = "UPDATE users SET name = ?, email = ?, phone = ?, status = ? WHERE id = ?";
+$stmt = $pdo->prepare($sql);
+try {
+    $stmt->execute([$data['name'], $data['email'], $data['phone'], $data['status'], $userId]);
+    echo json_encode(['message'=>'Profile updated']);
+} catch (PDOException $e) {
+    http_response_code(400);
+    echo json_encode(['error'=>'Update failed']);
+}

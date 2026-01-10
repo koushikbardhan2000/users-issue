@@ -26,9 +26,9 @@ try {
     echo json_encode(['error' => 'Invalid token']);
     exit;
 }
-if ($role !== 'MANAGER') {
+if ($role !== 'SUPPORT_ENGINEER') {
     http_response_code(403);
-    echo json_encode(['error' => 'Access denied, manager only']);
+    echo json_encode(['error' => 'Access denied, engineer only']);
     exit;
 }
 // (JWT decode omitted for brevity; assume $userId and role checked)
