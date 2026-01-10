@@ -81,7 +81,7 @@ curl -X POST http://localhost/users-issue/api/calls/create.php -H "Content-Type:
 #### Manager:
 
 ```bash
-curl -X POST http://localhost/users-issue/api/auth/manager_login.php -H "Content-Type: application/json" -d '{"email":"alice.johnson@example.com","password":"managerPass123"}'
+curl -X POST http://localhost/users-issue/api/auth/manager_login.php -H "Content-Type: application/json" -d '{"email":"jane.manager@example.com","password":"managerPass123"}'
 ```
 
 #### Engineer:
@@ -105,7 +105,7 @@ Use it in `Authorization: Bearer` header for protected requests.
 ### 🔸 Manager: View Pending Calls
 
 ```bash
-curl -X GET "http://localhost/users-issue/api/manager/calls_list.php?status=PENDING" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNjcxNjksImV4cCI6MTc2ODA3MDc2OSwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.-wroG-8f66PhKLCwbzojoT_gU8hUgo4eP8oeQmoHy7w" -H "Content-Type: application/json"
+curl -X GET "http://localhost/users-issue/api/manager/calls_list.php?status=PENDING" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNzM2MzQsImV4cCI6MTc2ODA3NzIzNCwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.sVM60CeNTvQKOtb88b0tZ9CrIqhidnduUxQCWcbqrYc" -H "Content-Type: application/json"
 ```
 
 ### 🔸 Engineer: Resolve a Call
@@ -116,23 +116,27 @@ curl -X POST http://localhost/users-issue/api/engineer/resolve_call.php -H "Auth
 
 ## Manager Endpoints (Protected)
 ```bash
-curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNjcxNjksImV4cCI6MTc2ODA3MDc2OSwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.-wroG-8f66PhKLCwbzojoT_gU8hUgo4eP8oeQmoHy7w" http://localhost/users-issue/api/manager/profile_get.php
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNzM2MzQsImV4cCI6MTc2ODA3NzIzNCwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.sVM60CeNTvQKOtb88b0tZ9CrIqhidnduUxQCWcbqrYc" http://localhost/users-issue/api/manager/profile_get.php
 
-curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNjcxNjksImV4cCI6MTc2ODA3MDc2OSwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.-wroG-8f66PhKLCwbzojoT_gU8hUgo4eP8oeQmoHy7w" -d '{"name":"Jane Manager","email":"jane.manager@example.com","phone":"123-456-7890", "status": "ACTIVE"}' http://localhost/users-issue/api/manager/profile_put.php
+curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNzM2MzQsImV4cCI6MTc2ODA3NzIzNCwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.sVM60CeNTvQKOtb88b0tZ9CrIqhidnduUxQCWcbqrYc" -d '{"name":"Jane Manager","email":"jane.manager@example.com","phone":"123-456-7890", "status": "ACTIVE"}' http://localhost/users-issue/api/manager/profile_put.php
 
-curl -X GET "http://localhost/users-issue/api/manager/calls_list.php?status=PENDING" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNjcxNjksImV4cCI6MTc2ODA3MDc2OSwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.-wroG-8f66PhKLCwbzojoT_gU8hUgo4eP8oeQmoHy7w" -H "Content-Type: application/json"
+curl -X GET "http://localhost/users-issue/api/manager/calls_list.php?status=PENDING" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNzM2MzQsImV4cCI6MTc2ODA3NzIzNCwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.sVM60CeNTvQKOtb88b0tZ9CrIqhidnduUxQCWcbqrYc" -H "Content-Type: application/json"
 
-curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNjcxNjksImV4cCI6MTc2ODA3MDc2OSwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.-wroG-8f66PhKLCwbzojoT_gU8hUgo4eP8oeQmoHy7w" "http://localhost/users-issue/api/manager/calls_list.php?status=ONGOING"
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNzM2MzQsImV4cCI6MTc2ODA3NzIzNCwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.sVM60CeNTvQKOtb88b0tZ9CrIqhidnduUxQCWcbqrYc" "http://localhost/users-issue/api/manager/calls_list.php?status=ONGOING"
 
-curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNjcxNjksImV4cCI6MTc2ODA3MDc2OSwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.-wroG-8f66PhKLCwbzojoT_gU8hUgo4eP8oeQmoHy7w" "http://localhost/users-issue/api/manager/calls_list.php?status=CLOSED"
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNzM2MzQsImV4cCI6MTc2ODA3NzIzNCwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.sVM60CeNTvQKOtb88b0tZ9CrIqhidnduUxQCWcbqrYc" "http://localhost/users-issue/api/manager/calls_list.php?status=CLOSED"
 
-curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNjcxNjksImV4cCI6MTc2ODA3MDc2OSwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.-wroG-8f66PhKLCwbzojoT_gU8hUgo4eP8oeQmoHy7w" "http://localhost/users-issue/api/manager/call_details.php?id=4"
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNzM2MzQsImV4cCI6MTc2ODA3NzIzNCwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.sVM60CeNTvQKOtb88b0tZ9CrIqhidnduUxQCWcbqrYc" "http://localhost/users-issue/api/manager/call_details.php?id=4"
 
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNjcxNjksImV4cCI6MTc2ODA3MDc2OSwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.-wroG-8f66PhKLCwbzojoT_gU8hUgo4eP8oeQmoHy7w" -d '{"call_id":1,"engineer_id":2}' http://localhost/users-issue/api/manager/assign_engineer.php
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNzM2MzQsImV4cCI6MTc2ODA3NzIzNCwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.sVM60CeNTvQKOtb88b0tZ9CrIqhidnduUxQCWcbqrYc" -d '{"call_id":1,"engineer_id":2}' http://localhost/users-issue/api/manager/assign_engineer.php
 
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNjcxNjksImV4cCI6MTc2ODA3MDc2OSwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.-wroG-8f66PhKLCwbzojoT_gU8hUgo4eP8oeQmoHy7w" -d '{"call_id":4,"resolution":"Issue fixed","status":"CLOSED", "final_remark": "fixed by engineer id 2"}' http://localhost/users-issue/api/manager/close_call.php
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNzM2MzQsImV4cCI6MTc2ODA3NzIzNCwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.sVM60CeNTvQKOtb88b0tZ9CrIqhidnduUxQCWcbqrYc" -d '{"call_id":4,"resolution":"Issue fixed","status":"CLOSED", "final_remark": "fixed by engineer id 2"}' http://localhost/users-issue/api/manager/close_call.php
 
-curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNjcxNjksImV4cCI6MTc2ODA3MDc2OSwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.-wroG-8f66PhKLCwbzojoT_gU8hUgo4eP8oeQmoHy7w" http://localhost/users-issue/api/manager/support_engineers.php
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNzM2MzQsImV4cCI6MTc2ODA3NzIzNCwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.sVM60CeNTvQKOtb88b0tZ9CrIqhidnduUxQCWcbqrYc" http://localhost/users-issue/api/manager/support_engineers.php
+
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNzM2MzQsImV4cCI6MTc2ODA3NzIzNCwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.sVM60CeNTvQKOtb88b0tZ9CrIqhidnduUxQCWcbqrYc" "http://localhost/users-issue/api/reports/calls_by_interval.php?days=30"
+
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNzM2MzQsImV4cCI6MTc2ODA3NzIzNCwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.sVM60CeNTvQKOtb88b0tZ9CrIqhidnduUxQCWcbqrYc" http://localhost/users-issue/api/reports/engineer_performance.php
 
 ```
 
@@ -169,7 +173,7 @@ curl -X POST http://localhost/users-issue/api/engineer/resolve_call.php -H "Auth
 * Use **Postman** or `curl` for testing
 * All input/output is in **JSON**
 * Manager and engineer data is stored in a shared `users` table
-* Use strong secrets for JWT
+* Use your own strong secrets for JWT
 * Each role has separate login + dashboard logic
 
 ---
@@ -177,7 +181,15 @@ curl -X POST http://localhost/users-issue/api/engineer/resolve_call.php -H "Auth
 ## 🔧 To-Do (Future Improvements)
 
 * Refresh tokens
-* Logging (who closed/resolved)
 * Email notifications to users
+
+---
+
+### 📫 Reach Me At:
+- 📧 Email: koushikbardhan2000@gmail.com
+- 💼 [LinkedIn](https://www.linkedin.com/in/koushik-bardhan-459895225/)
+- 💼 [Vidwan](https://vidwan.inflibnet.ac.in/profile/563932)
+- 🔬 [ORCID](https://orcid.org/0009-0002-8846-8347)
+- 🐍 [GitHub](https://github.com/koushikbardhan2000)
 
 ---
