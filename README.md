@@ -16,48 +16,13 @@ JWT-based authentication is used for manager and engineer routes. Built using pl
 
 ---
 
-## 📁 Project Structure
-
+## Prerequisit
+```bash
+sudo apt update
+sudo apt install composer
+composer -V
+composer require firebase/php-jwt
 ```
-
-project-root/
-│
-│
-├── vendor/                     # Composer dependencies
-│
-├── api/
-|   ├── config.php               # DB connection & JWT secret
-|   |
-│   ├── calls/
-│   │   └── create.php          # Public: Create call
-│   │
-│   ├── manager/
-│   │   ├── profile_get.php
-│   │   ├── profile_put.php
-│   │   ├── calls_list.php
-│   │   ├── call_details.php
-│   │   ├── assign_engineer.php
-│   │   ├── close_call.php
-│   │   └── support_engineers.php
-│   │
-│   ├── engineer/
-│   │   ├── profile_get.php
-│   │   ├── profile_put.php
-│   │   ├── calls_list.php
-│   │   └── resolve_call.php
-│   │
-│   ├── auth/
-│   │   ├── manager_login.php
-│   │   └── engineer_login.php
-│
-├── middleware/
-│   └── auth.php                # JWT validation middleware
-│
-├── composer.json               # Composer dependencies
-└── README.md                   # You're here!
-
-````
-
 ---
 
 ## ⚙️ Setup Instructions
@@ -84,7 +49,7 @@ composer require firebase/php-jwt
 
 ```sql
 -- Run this inside MySQL CLI or phpMyAdmin
-SOURCE ./schema-and-demo-data.sql
+SOURCE ./db.sql
 ```
 
 Or copy SQL from the setup instructions provided earlier.
@@ -98,7 +63,7 @@ $host = "localhost";
 $user = "root";
 $password = "";
 $db_name = "issue";
-$jwt_secret = "your-strong-secret-key-here";
+$jwt_secret = "";
 ```
 
 ---
@@ -110,29 +75,19 @@ one-liner
 ```bash
 curl -X POST http://localhost/users-issue/api/calls/create.php -H "Content-Type: application/json" -d '{"problem_type": "Login Problem", "user_name": "Jane Doe", "user_email": "jane@example.com", "user_phone": "123-456-7890", "description": "Unable to log in since yesterday."}'
 ```
-or full
-```bash
-curl -X POST http://localhost/users-issue/api/calls/create.php \
--H "Content-Type: application/json" \
--d '{"problem_type": "Login", "user_name": "Jane", "user_email": "jane@example.com", "user_phone": "1234567890", "description": "Cannot login"}'
-```
 
 ### 🔐 Login to Get JWT
 
 #### Manager:
 
 ```bash
-curl -X POST http://localhost/users-issue/api/auth/manager_login.php \
--H "Content-Type: application/json" \
--d '{"email":"manager@example.com","password":"yourpass"}'
+curl -X POST http://localhost/users-issue/api/auth/manager_login.php -H "Content-Type: application/json" -d '{"email":"alice.johnson@example.com","password":"managerPass123"}'
 ```
 
 #### Engineer:
 
 ```bash
-curl -X POST http://localhost/users-issue/api/auth/engineer_login.php \
--H "Content-Type: application/json" \
--d '{"email":"engineer@example.com","password":"yourpass"}'
+curl -X POST http://localhost/users-issue/api/auth/engineer_login.php -H "Content-Type: application/json" -d '{"email":"bob.smith@example.com","password":"password123"}'
 ```
 
 You’ll get a token like:
@@ -150,18 +105,13 @@ Use it in `Authorization: Bearer` header for protected requests.
 ### 🔸 Manager: View Pending Calls
 
 ```bash
-curl -X GET "http://localhost/users-issue/api/manager/calls_list.php?status=PENDING" \
--H "Authorization: Bearer YOUR_JWT" \
--H "Content-Type: application/json"
+curl -X GET "http://localhost/users-issue/api/manager/calls_list.php?status=PENDING" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNTgyODYsImV4cCI6MTc2ODA2MTg4NiwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJNQU5BR0VSIn19.LKRNaGbJr-aZ-iMXVEJ0yIKsT7Cwod7ZJpjqORUH6pQ" -H "Content-Type: application/json"
 ```
 
 ### 🔸 Engineer: Resolve a Call
 
 ```bash
-curl -X POST http://localhost/users-issue/api/engineer/resolve_call.php \
--H "Authorization: Bearer YOUR_JWT" \
--H "Content-Type: application/json" \
--d '{"call_id": 5, "resolution_status": "RESOLVED", "issue_type": "Router Issue", "remarks": "Replaced router"}'
+curl -X POST http://localhost/users-issue/api/engineer/resolve_call.php -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjgwNjIxODQsImV4cCI6MTc2ODA2NTc4NCwiZGF0YSI6eyJ1c2VyX2lkIjoiMiIsInJvbGUiOiJTVVBQT1JUX0VOR0lORUVSIn19.OMqGqS5NgTzYCP1WarvapmYrSAqSOwsTan6gbTtPYpQ" -H "Content-Type: application/json" -d '{"call_id": 4,  "resolution_status": "RESOLVED", "issue_type": "Router Issue", "remarks": "Replaced router"}'
 ```
 
 ---
@@ -190,23 +140,10 @@ curl -X POST http://localhost/users-issue/api/engineer/resolve_call.php \
 
 ---
 
-## 🔧 To-Do (Optional Improvements)
+## 🔧 To-Do (Future Improvements)
 
-* Password hashing (bcrypt)
 * Refresh tokens
 * Logging (who closed/resolved)
 * Email notifications to users
-* Frontend UI (HTML + JS)
 
 ---
-
-## 👨‍💻 Author
-
-Koushik – 2026
-
-```
-
----
-
-Let me know if you want this saved as a real `README.md` file in your project, or need a version with Markdown preview!
-```
