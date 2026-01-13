@@ -45,5 +45,6 @@ $jwt = JWT::encode($payload, $jwt_secret, 'HS256');
 echo json_encode([
     'status' => 'success',
     'token' => $jwt,
-    'message' => 'Login successful'
+    'message' => 'Login successful',
+    'role' => $user['role']
 ]);

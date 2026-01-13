@@ -88,7 +88,7 @@ curl -X POST http://localhost/users-issue/api/auth/manager_login.php -H "Content
 #### Engineer:
 
 ```bash
-curl -X POST http://localhost/users-issue/api/auth/engineer_login.php -H "Content-Type: application/json" -d '{"email":"bob.smith@example.com","password":"password123"}'
+curl -X POST http://localhost/users-issue/api/auth/engineer_login.php -H "Content-Type: application/json" -d '{"email":"dana.lee@example.com","password":"password123"}'
 ```
 
 You’ll get a token like:
