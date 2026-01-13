@@ -1,5 +1,11 @@
 <?php
 // config.php
+// CORS headers
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+// DB configuration
 $host     = 'localhost';
 $db_name  = 'issue';
 $db_user  = 'root';
